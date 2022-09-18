@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 ch02_반복문  while</title>
+</head>
+<body>
+    <h1>반복문  while</h1>
+
+    <script>
+        // while문
+        let a = 0;
+        while (a<10) {
+            document.write(a);
+            a++;
+        }
+
+        // 값을 받아와서 반복하는 while문
+        let word = prompt("나무를 영어로 입력하세요");
+        while (word != "tree") {
+            word = prompt("나무를 영어로 입력하세요");
+        }
+        document.write("<p>맞췄습니다</p>");
+
+        // while 실습
+        // 프롬프트 창에 10+10? 이라는 질문을 하고 맞출 때까지 반복
+        let question = prompt("10+10?");
+        // 프롬프트에서 받아온 값은 모두 문자열
+        while (question!="20") {
+            question = prompt("10+10?");
+        }
+        alert("correct answer!");
+
+        // 0을 입력받을 때까지 입력 받은 숫자의 값을 다 더하는 while문
+        // while문이 끝난 후에 결과 출력
+        // 단, 숫자가 아닌 값이 입력되면 isNaN을 통해서 더하지 않는다.
+        let inputNum = prompt("더할 숫자를 입력하세요. 0을 입력하면 종료합니다");
+        let sum = 0;
+        while (inputNum != 0) {
+            if ( !isNaN(Number(inputNum)) ) {
+                sum += Number(inputNum);
+            }
+            inputNum = prompt("더할 숫자를 입력하세요. 0을 입력하면 종료합니다");
+        }
+        alert(`종료되었습니다. 더한 값 : ${sum}`);
+
+        // do while문
+        let b = 0;
+        do {
+            document.write(b);
+            b++;
+        } while (b<0);
+
+        // 값을 여러번 입력받을 때, 
+        // do while을 사용하면 한번은 반드시 입력받을 수 있다.
+        let num = 0;
+        do {
+            num = prompt("숫자를 입력하세요");
+        } while ( isNaN(num) );
+        alert(num);
+
+        // do while문 실습
+        // 저장된 비밀번호를 맞출 때까지 프롬프트 창을 반복
+        // count 변수를 활용하여 비밀번호 입력을 시도한 횟수 출력
+        // 비밀번호 입력이 가능한 최대 횟수는 5번
+        let password = "chicken";
+        let userInput = 0;
+        let count = 0;
+        do {
+            userInput = prompt("비밀번호를 입력하세요");
+            count++;
+        } while (userInput != password && count<5);
+        if (count<5) {
+            alert("맞췄습니다");
+        } else {
+            alert(`${count}회 시도하였습니다. 잠시 후에 다시 시도해주세요`);
+        }
+
+        // break문
+        let c = 0;
+        while(true) {
+            document.write("<p>무한반복중입니다</p>");
+            c++;
+            if (c>10) {
+                break;
+            }
+        }
+        document.write(c);
+
+        // continue
+        for (let i=0; i<=10; i++) {
+            if (i%2==1) {
+                continue;
+            }
+            document.write(`<p>${i}</p>`);
+        }
+
+        // break, continue 실습
+        // while의 조건식이 true 일 때, 1~10까지 출력한 후 반복문 빠져나오기
+        let num1 =1;
+        while (true) {
+            if (num1 > 10) {
+                break;
+            }
+            document.write(num1+"  ");
+            num1++;
+        }
+
+        document.write("<br>");
+
+        // continue를 사용하여 1~10까지의 숫자 중, 3의 배수는 제외하고 출력하기
+        for (let i=1; i<=10; i++) {
+            if (i%3==0) {
+                continue;
+            }
+            document.write(i+"  ");
+        }
+    </script>
+</body>
+</html>

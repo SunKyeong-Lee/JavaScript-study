@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06 ch02_반복문 종합실습</title>
+    <style>
+        input:hover {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>반복문 종합실습</h1>
+    <p>Math.random()을 이용하여 랜덤한 숫자 생성하기 (정수)</p>
+    <p>아래 버튼을 누르면 <b>랜덤한 숫자 3개</b>가 생성됩니다.</p>
+    <input type="button" onclick="numCheck()" value="숫자 생성">
+
+    <script>
+        function numCheck() {
+            document.write("랜덤한 수 3개가 생성되었습니다.<br>");
+            // Math.random() : 0 이상 1 미만의 랜덤한 소수 생성
+            for (let i=0; i<3; i++) {
+                let randomNum = Math.random()*10  // 0~9까지의 일의 자리
+                let random = parseInt(randomNum);  // 정수 부분만 저장
+                document.write(`<p>${random}</p>`);
+            }
+        }
+    </script>
+</body>
+</html>
