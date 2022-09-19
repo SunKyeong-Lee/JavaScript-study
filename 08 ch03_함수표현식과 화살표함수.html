@@ -10,12 +10,110 @@
     <h1>함수표현식과 화살표함수</h1>
 
     <script>
-        // 이름없는 함수를 사용하는 방법 : 함수표현식
+        // 함수를 선언하기 전에 호출
+        intro();
+        // 변수에 함수를 할당해서 사용하기 때문에
+        // 변수를 선언하지 않으면 사용할 수 없다.
+        // printName("흥부");
+
+        // 선언식 함수
+        function intro() {
+            document.write("<p>안녕하세요. 반갑습니다.</p>")
+        }
+
+        // 이름없는 함수를 사용하는 방법 : 함수표현식(익명 함수)
         let printName = function(name) {
             document.write(`<p>${name}</p>`);
             return name;
         }
         printName("홍길동");
+
+        // 실습 -함수표현식
+        let sub = function(num1, num2) {
+            let num = num1 - num2;
+            return num;
+        }
+        document.write(sub(5,2));
+
+        // 함수표현식 사용 예 : 정해진 공간에서만 사용하고 싶을 때
+        if (true) {
+            let printNum = function(num) {
+                document.write(`<li>${num}</li>`);
+            }
+            for (let i=0; i<10; i++) {
+                // 함수
+                printNum(i);
+            }
+        }
+        // 함수표현식으로 작성한 경우, 작성한 블록이 아닌 곳에서 호출할 수 없다.
+        // let 키워드의 특징
+        // printNum(12);  // 오류
+
+        // 화살표 함수 : 함수표현식을 간단히 작성하는 방법
+        // function 대신 => 를 사용한다.
+        // 1. 매개변수가 없고, return이 없는 함수
+        let arrowNoVar = () => {document.write("매개변수와 return이 없다");}
+        arrowNoVar();
+        // 2. 매개변수가 1개 있고, return이 없는 함수
+        let arrowOneVar = a => {document.write(`<p>${a}</p>`);}
+        arrowOneVar("매개변수 하나가 있다");
+        // 3. 매개변수가 2개 이상이고, return이 없는 함수
+        let arrowMoreVar = (a,b,c) => {document.write(a,b,c);}
+        arrowMoreVar(1,2,3);
+        // 4. 실행 명령어 없이 return값을 줄 때 (한줄)
+        // => 화살표 뒤에 블록(중괄호)없이 표현식을 적어주면 그 내용은 return값이 된다.
+        let arrowReturn = (a,b) => a+b;
+        document.write(arrowReturn(3,5));
+        // 5. 중괄호를 이용하여 여러줄로 출력한 후 return
+        let arrowMultiReturn = (a,b) => {
+            let sum = a+b;
+            return sum;
+        }
+        document.write(arrowMultiReturn(10,30));
+        
+        // 실습 - 화살표 함수
+        // 두 수의 값을 빼고, 뺀 값을 반환하는 함수
+        let subArrow = (a,b) => a-b;
+        document.write(subArrow(5,10));
+
+        // 함수 안에 함수를 인수로 넣기
+        function funcVar(func) {
+            document.write("매개변수로 받아온 함수를 실행합니다");
+            func();
+        }
+
+        // 함수를 인수값으로 넣어주기
+        // 인수값으로 한번 쓸 함수 > 익명 함수
+        funcVar( function() {
+            document.write("익명함수를 통해 넣어준 함수입니다");
+        } );
+
+        // 함수 실습 
+        // confirm 확인
+        // console.log(confirm("확인"));
+
+        // confirm의 값은 boolean > 확인 : true / 취소 : false
+        function ask(question, yes, no) {
+            if ( confirm(question) ) {
+                yes();  // 받아온 함수 실행
+            } else {
+                no();  // 받아온 함수 실행
+            }
+        }
+
+        ask(
+            "동의하십니까?",
+            // 아래 함수표현식을 화살표 함수로 바꿔보자
+            function() {alert("동의하셨습니다.");},
+            function() {alert("취소 버튼을 누르셨습니다.");}
+        )
+
+        ask(
+            "동의하십니까?",
+            // 함수표현식에서 화살표 함수로
+            () => {alert("동의하셨습니다.");},
+            () => {alert("취소 버튼을 누르셨습니다.");}
+        )
     </script>
 </body>
 </html>
