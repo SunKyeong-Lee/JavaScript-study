@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 ch03_중첩함수와 클로저</title>
+</head>
+<body>
+    <h1>중첩함수와 클로저</h1>
+
+    <script>
+        // 중첩 함수 - 함수 안에 함수가 들어가 있는 상태
+        function f() {    // 감싸고 잇는 함수
+            let value = 123;
+            // 함수 안에 있는 함수는 호이스팅 되지 않고 함수 안에서만 사용할 수 있다.
+            function g() {    // 함수 안에 생성된 함수
+                alert(`중첩 함수를 통해 호출했습니다 ${value}`);
+            }
+            g();  // f() 함수 안에서 호출
+        }
+        f();  // 중첩 함수를 실행하기 위해 감싸고 있는 함수 호출
+        // g();  // 오류 > 함수 안에 있는 함수는 호출할 수 없다.
+
+
+        // 실습 - 중첩 함수
+        function add(a,b) {
+            let sum = a+b;
+            function printNum() {
+                document.write(sum+"<br>");
+            }
+            printNum();
+        }
+        add(5,6);
+
+        // 클로저 함수 - 중첩 함수의 하나로 외부 변수에 접근하는 함수
+        function count() {    // 감싸고 있는 함수
+            let count = 0;
+            return function() {    // 클로저 함수
+                return count += 1;
+            }
+        }
+        // 외부로 호출하기 위한 함수 - count() 함수 한 번 호출!
+        let startCount = count();
+        // startCount로 클로저 함수 호출
+        // 호출할 때마다 값이 증가함
+        document.write(startCount()+"<br>");  // 1
+        document.write(startCount()+"<br>");  // 2
+        document.write(startCount()+"<br>");  // 3
+
+        // 클로저 함수가 없는 함수 - 호출할 때마다 초기화
+        function noCount() {
+            let count = 0;
+            return count += 1;
+        }
+        // 호출할 때마다 1의 값만 나옴
+        document.write(noCount()+"<br>");  // 1
+        document.write(noCount()+"<br>");  // 1
+        document.write(noCount()+"<br>");  // 1
+
+        // 입력받은 숫자값을 더해주는 클로저 함수
+        function sumClosures() {
+            let sum = 0;  // 변수 초기화
+            return function(num) {    // 클로저 함수
+                return sum += num;
+            }
+        }
+        // sumClosures 함수 실행, return에 넣어준 클로저 함수를 startSum에 할당
+        let startSum = sumClosures();
+        document.write(startSum(3)+"<br>");  // 3
+        document.write(startSum(5)+"<br>");  // 8 
+        document.write(startSum(10)+"<br>");  // 18
+
+        // 실습 - 클로저 함수를 이용하여 넣은 값을 계속해서 곱하는 함수 만들기
+        // MultiClosures(), startMult()
+        // 클로저 함수를 화살표 함수로 작성해보기 (sumClosures에서는 함수표현식=익명 함수)
+        function MultiClosures() {
+            let mult = 1;
+            return num => mult *= num;
+        }
+        let startMult = MultiClosures();
+        document.write(startMult(2)+"<br>");  // 2
+        document.write(startMult(8)+"<br>");  // 16
+        document.write(startMult(20)+"<br>");  // 320
+
+        // 앞서 작성한 클로저 함수를 수정하여 2씩 증가하는 함수 만들기
+        function count2() {
+            let num = 0;
+            return () => num += 2;
+        }
+        let startCount2 = count2();
+        document.write(startCount2()+"<br>");  // 2
+        document.write(startCount2()+"<br>");  // 4
+        document.write(startCount2()+"<br>");  // 6
+        document.write(startCount2()+"<br>");  // 8
+    </script>
+</body>
+</html>
