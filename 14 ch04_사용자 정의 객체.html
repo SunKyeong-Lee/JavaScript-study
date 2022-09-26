@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>사용자 정의 객체</h1>
-    
+
     <script>
         // 리터럴 표기를 이용한 객체의 생성
         let puppy = {
@@ -152,7 +152,66 @@
             }
         }
         let myMessage = new Message("홍길동", "반갑습니다", "17:44");
-        let yourMessag = new Message("성춘향", "안녕하세요", "17:45");
+        let yourMessage = new Message("성춘향", "안녕하세요", "17:45");
+
+        // 객체를 속성으로 갖는 객체
+        let memo = {
+            title : "오늘할일",
+            todo : {
+                morning : ["청소", "준비"],
+                afternoon : ["수업"],
+                evening : ["정리", "독서"]
+            }
+        }
+        console.log(memo.todo.afternoon[0]);   // 수업
+
+        // 객체를 속성으로 갖는 객체 실습
+        let myMovie = {
+            title : "킹메이커",
+            time : "120",
+            rate : 8.84,
+            comment : {
+                id : "movieMaster",
+                content : "Good"
+            }
+        }
+        console.log(myMovie.comment.content);   // Good
+
+        // 사용자 객체 실습 - 동물병원 진료차트
+        // 생성자 함수
+        function AnimalChart(name, kind, age) {
+            this.name = name;
+            this.kind = kind;
+            this.age = age;
+            this.sickness = "";
+            this.condition = "";
+
+            this.receive = function(sickness, condition) {
+                this.sickness = sickness;
+                this.condition = condition;
+            }
+
+            this.confirm = function() {
+                let s = ""; 
+                for (let x in this) {
+                    // 함수 부분은 제외하기 위함
+                    if (typeof this[x] == "function") {
+                        continue;
+                    }
+                    s += x+": "+this[x]+"\n";
+                }
+                return s;
+            }
+        }
+
+        let first = new AnimalChart("마루", "강아지", 1);  // 객체 생성
+        first.receive("감기", "나쁨");
+        console.log(first.confirm());
+
+        let count = 0;
+        let charts = [];
+        charts[count] = new AnimalChart("디디", "고양이", 3);
+        count++;
     </script>
 </body>
 </html>
