@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0926 과제</title>
+</head>
+<body>
+    <script>
+        function multi() {
+            let num = prompt("원하는 단을 입력하세요")
+            if ( !isNaN(Number(num)) && num!=="") {
+                console.log("성공");
+                document.write(`<h2>${num}단</h2>`);
+                for (let i=1; i<10; i++) {
+                    document.write(`<p>${num} x ${i} = ${num*i}</p>`);
+                }
+            } else {
+                console.log("입력오류")
+                alert("구구단에 들어가는 수가 아닙니다");
+            }
+        }
+        multi();
+    </script>
+</body>
+</html>
