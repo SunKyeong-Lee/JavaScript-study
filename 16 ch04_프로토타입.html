@@ -8,69 +8,97 @@
 </head>
 <body>
     <h1>프로토타입</h1>
-
+    
     <script>
-        // 프로토타입은 미리 만들어둔 내용을 사용하기위해 
-        // 속성과 메소드를 복제해서 들고온 것
+        // 자바스크립트는 프로토타입 기반의 객체 지향 언어
+        // 자바스크립트 상속은 기존의 객체를 프로토타입으로 사용하여
+        // 해당 객체를 재사용하는 것
+
+        // 자바스크립트의 모든 객체는 프로토타입이라는 객채를 가지고 있다!
+        // 자바스크립트의 모든 객체는 최소한 하나 이상의 다른 객체로부터 상속받는다.
+        // 이때 상속되는 정보를 제공하는 객체가 프로토타입 prototype
+
+        // 모든 객체는 그들의 프로토타입으로부터 속성과 메소드를 상속받는다.
+        // 미리 만들어둔 내용을 사용하기 위해 속성과 메소드를 복제해서 들고온 것
 
         // 리터럴 객체에서 프로토타입
+        // let rabbit = new Object();와 같다.
+        // 따라서 리터럴 객체의 프로토타입은 Object
         let rabbit = {
-            color: "흰색",
-            run: function() {
+            color : "흰색",
+            run : function() {
                 document.write("<p>달립니다</p>");
             }
         }
-        // 리터럴 객체의 프로토타입은 Object 이다.
-        // 배열의 프로토타입은 Array 이다.
-        // 배열에 바로 메소드가 지정되는 것이 아니라 프로토타입에 있는 메소드를 들고온다.
 
-        // 사용자 지정 객체를 만들기위한 생성자
+
+        // 배열의 프로토타입은 Array
+        // 배열에 바로 메소드가 지정되는 것이 아니라 프로토타입에 있는 메소드를 들고온다.
+        let arr = new Array();
+
+
+        // 프로토타입을 생성하는 가장 기본적인 방법 > 생성자 함수
+        // 사용자 지정 객체를 만들위한 생성자
         // 만들어진 객체는 생성자 함수를 프로토타입으로 갖는다.
         function Person(name) {
             this.name = name;
             this.intro = function() {
                 document.write(`<p>${this.name}입니다</p>`);
             }
-            // 생성자함수에 프로토타입을 추가
+            // 생성자 프로토타입에 속성 및 메소드 추가 > 생성자 함수에 직접 작성
+            // 프로토타입에 프로퍼티를 추가할 때는 기본값을 가질 수 있다.
+            this.address = "부산";
+            // 생성자 함수 안에서 프로토타입에 속성/메소드 추가
+            // 보통은 아래처럼 prototype 속성으로 따로 추가하는 편
             this.__proto__.lastName = function() {
-                return this.name.slice(1);
+                return this.name.slice(1);    
             }
         }
 
-        // 생성자 함수의 prototype에 메소드/속성을 추가해줄 수 있다.
+        // 이 객체들은 Person이라는 프로토타입을 가짐
+        let kim = new Person("김길동");
+        let park = new Person("박길동");
+
+        // 객체에 속성 및 메소드 추가
+        kim.age = 20; 
+
+        // 생성자함수의 prototype에 메소드/속성을 추가해줄 수 있다.
+        // prototype 속성을 이용해 쉽게 추가 가능
         Person.prototype.firstName = function() {
             return this.name.charAt(0);
         }
 
-        let kim = new Person("김길동");
-        let park = new Person("박길동");
-        // 객체에 들어가 있는 메소드는 객체를 생성할때마다 만들지만
+        // 객체에 들어가 있는 프로퍼티는 객체를 생성할 때마다 만들지만
         // prototype은 하나를 만들어두고 접근해서 사용한다.
 
-
-        // prototype은 함수마다 하나씩 가지고있는 것
-        // __proto__는 객체마다 prototype에 접근하기위해 가지고 있는 것
+        // prototype 속성은 함수마다 하나씩 가지고있는 것
+        // __proto__ 속성은 객체마다 prototype에 접근하기 위해 가지고 있는 것
         // __proto__는 prototype 안에 있다.
 
-        
+
         // 프로토타입 실습
-        // 프로토타입으로 다음 속성과 메소드 추가
-        // family 속성 : "진돗개"
-        // familyPrint 메소드 : family 속성 return
-        function Dog(name, age) {
-            this.name = name;
-            this.age = age;
+        function Dog(name, age) {   // 개에 관한 생성자 함수
+            this.name = name;       // 이름에 관한 프로퍼티
+            this.age = age;         // 나이에 관한 프로퍼티
         }
 
+        // 현재 존재하고 있는 Dog 프로토타입에 프로퍼티 추가
         Dog.prototype.family = "진돗개";
         Dog.prototype.familyPrint = function() {
             return this.family;
         }
 
-        let myPuppy = new Dog("마루", 1);
+        let myDog = new Dog("마루", 1);  // 이 객체는 Dog라는 프로토타입을 가짐
+        console.log(myDog.family);  // 진돗개
+
+        let yourDog = new Dog("흰둥이", 2);
+        console.log(yourDog.family);  // 진돗개
+        yourDog.family = "푸들";
+        console.log(yourDog.family);  // 푸들
 
 
-        // getter/setter을 이용해서 속성의 값을 함수를 통해서 정해서 들고오거나 설정할 수 있다.
+        // getter/setter을 이용해서 속성의 값을 
+        // 함수를 통해서 수정해서 들고오거나 설정할 수 있다.
         // 이미 객체가 있을 때, 객체의 getter 속성을 추가하는 방법
         Object.defineProperty(myPuppy, "americanAge",
             {get: function() {return this.age -1;}}
