@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17 ch05_BOM</title>
+</head>
+<body>
+    <h1>BOM 객체</h1>
+
+    <script>
+        // BOM 브라우저 객체 모델
+        // window 객체
+        console.log(window.innerHeight);
+        console.log(innerHeight);  // window 접두사 생략 가능
+
+        // screen 객체
+        console.log(screen.height);
+        console.log(screen.width);  // 현재 사용자의 모니터 화면 크기(해상도)
+        console.log(window.outerWidth);  // 현재 브라우저 창의 크기
+
+        // location 객체
+        console.log(location.href);  // 현재 문서의 전체 url 주소를 문자열로 반환
+
+        // history 객체
+        console.log(history.length);  // 히스토리 목록의 개수를 반환
+        // window.history.back();  // 브라우저의 뒤로가기 버튼과 같은 동작
+
+        // navigator 객체
+        console.log(navigator.appVersion);  // 현재 브라우저 버전을 알려줌
+        console.log(navigator.platform);  // 현재 운영체제의 버전을 알려줌 
+        console.log(navigator.cookieEnabled);  // 쿠키 사용 여부를 알려줌
+
+        // 대화 상자
+        // alert(), confirm(), prompt()
+
+        // 타이머 - 내장함수 참고
+
+        // BOM 객체 실습
+        if (confirm("운영체제를 알려드릴까요?") == true) {
+            document.write(navigator.platform+"입니다");
+        }
+    </script>
+</body>
+</html>

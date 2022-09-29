@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 ch05_DOM 연습</title>
+</head>
+<body>
+    <h1>수정하기 전 제목입니다</h1>
+    <div>
+        <ul>
+            <li>첫번째 내용입니다</li>
+            <li>두번째 내용입니다</li>
+            <li>세번째 내용입니다</li>
+            <li>네번째 내용입니다</li>
+        </ul>
+    </div>
+    <div>
+        <ol>
+            <li>첫번째 내용입니다</li>
+            <li>두번째 내용입니다</li>
+            <li>세번째 내용입니다</li>
+            <li>네번째 내용입니다</li>
+        </ol>
+    </div>
+    <div class="main">
+        <p><span>빈 공간</span>입니다</p>
+    </div>
+    <div class="footer">
+        <p>푸터영역입니다</p>
+    </div>
+
+
+    <!-- 전체적으로 깃허브 확인하기 -->
+    <script>
+        function change() {
+            // h1 요소 변경
+            const h1Tag = document.querySelector("h1");
+            h1Tag.textContent = "DOM을 이용한 수정";
+            h1Tag.style.color = "tomato";
+            // setAttribute를 이용해서 값을 수정하면 style의 전체 값을 수정
+            // 예 > background-color만 설정되어 있다면 
+            //      color는 기본값으로 돌아가 검은색으로 보일 것
+            h1Tag.setAttribute(
+                "style", 
+                "color:cornflowerblue; background-color:lightgray;"
+            );
+            
+
+            // ul의 첫번째 li 삭제
+            const ulTag = document.querySelector("ul");
+            ulTag.removeChild(ulTag.firstElementChild);
+
+            // ul에 li 추가
+            const li = document.createElement("li");  // 노드 생성
+            li.innerHTML = "새로 추가한 노드입니다";
+            ulTag.append(li);  // 노드를 추가
+
+
+            // ol의 li 삭제, 내용 변경
+            const olTag = document.querySelector("ol");
+            // first와 last를 이용한 자식 찾기
+            olTag.firstElementChild.nextElementSibling.remove();
+            // children 배열을 통한 자식찾기
+            olTag.children[2].remove();
+            olTag.firstElementChild.innerHTML = "내용을 바꾸었습니다";
+            
+
+            // span 요소 변경
+            const spanTag = document.querySelector(".main p span");
+            spanTag.style.color = "tomato";
+            
+            // p 복제
+            const main = document.querySelector(".main");
+            main.append( spanTag.parentElement.cloneNode(true));
+            main.append( spanTag.parentElement.cloneNode(true));
+        }
+        change();
+    </script>
+</body>
+</html>

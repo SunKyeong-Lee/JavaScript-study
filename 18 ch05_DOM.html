@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18 ch05_DOM</title>
+</head>
+<body>
+    <h1>DOM</h1>
+    <h2 id="title">제목2</h2>
+    <a href="">링크</a>
+    <p id="textId">아이디가 적용된 p태그</p>
+    <p class="textClass">클래스가 적용된 p태그</p>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <form id="formTest">
+        <label for="">이름</label>
+        <input type="text" id="name">
+    </form>
+
+    <script>
+        // document 객체
+        // 웹 페이지에 존재하는 HTML 요소에 접근하고자 할 때
+        // 반드시 Document 객체부터 시작
+
+        // DOM 선택 메소드 - querySelector()를 자주씀
+        // document.getElementsByTagName("태그이름");
+        // document.getElementById("아이디");
+        // document.getElementsByClassName("클래스이름");
+        // document.getElementsByName("name속성값");
+        // document.querySelector("CSS선택자");
+        // document.querySelectorAll("CSS선택자");
+
+        // DOM 생성 메소드
+        // return을 통해서 요소를 생성
+        // 생성만 하고 HTMl 문서에 추가하지 않는다.
+        document.createElement("h3");
+
+        function changeElement() {
+            // DOM 요소의 변경
+            let title = document.querySelector("#title"); // 요소 선택
+            title.innerHTML = "이 제목으로 바뀌었습니다";   // 요소의 내용 변경
+            let today = new Date();
+            title.innerHTML = `${today.getMonth()+1}월 ${today.getDate()}일`;
+
+            let aTag = document.querySelector("a"); // 요소 선택
+            aTag.href = "https://www.naver.com/";   // 요소의 속성 변경
+            aTag.style.color = "red";               // 요소의 스타일 변경
+            aTag.style.textDecoration = "none";
+            aTag.style.border = "3px solid tomato";
+            // aTag.style.border = "1px";  // 변경할 일부만 작성 X
+            aTag.style.border = "1px dashed yellowgreen";
+            aTag.className = "tag";
+
+
+            // 실습 1 - 요소의 내용 변경
+            let classTag = document.querySelector(".textClass");
+            classTag.innerHTML = "클래스를 통해 수정된 내용입니다";
+
+            let idTag = document.querySelector("#textId")
+            idTag.innerHTML = "아이디를 들고 와서 수정된 내용입니다";
+
+            let liTag = document.querySelectorAll("ul li");
+            // 여러 개의 요소는 배열에 들어가 있으므로 한번에 접근하기 위해 for문 사용
+            for (let i=0; i<liTag.length; i++) {
+                liTag[i].innerHTML = "요소들을 한 번에 수정한 내용입니다";
+            }
+
+            // 실습 2 - 요소의 속성 변경
+            let formTag = document.querySelector("#formTest #name");
+            formTag.disabled = true;
+
+            // 실습 3 - 속성의 스타일 변경
+            let textTag = document.querySelector(".textClass");
+            textTag.style.backgroundColor = "rgb(100, 150, 150)";
+            title.style.textDecoration = "line-through";
+            for (let i=0; i<liTag.length; i++) {
+                liTag[i].style.color = "cornflowerblue";
+            }
+        }
+        changeElement();
+    </script>
+</body>
+</html>
