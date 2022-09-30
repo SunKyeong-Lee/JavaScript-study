@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>20 ch05_DOM 연습</title>
+    <title>21 ch05_DOM 연습</title>
 </head>
 <body>
     <h1>수정하기 전 제목입니다</h1>
@@ -32,7 +32,6 @@
     </div>
 
 
-    <!-- 전체적으로 깃허브 확인하기 -->
     <script>
         function change() {
             // h1 요소 변경
@@ -46,7 +45,7 @@
                 "style", 
                 "color:cornflowerblue; background-color:lightgray;"
             );
-            
+
 
             // ul의 첫번째 li 삭제
             const ulTag = document.querySelector("ul");
@@ -65,12 +64,12 @@
             // children 배열을 통한 자식찾기
             olTag.children[2].remove();
             olTag.firstElementChild.innerHTML = "내용을 바꾸었습니다";
-            
+
 
             // span 요소 변경
             const spanTag = document.querySelector(".main p span");
             spanTag.style.color = "tomato";
-            
+
             // p 복제
             const main = document.querySelector(".main");
             main.append( spanTag.parentElement.cloneNode(true));

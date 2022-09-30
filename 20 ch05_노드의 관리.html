@@ -7,10 +7,94 @@
     <title>20 ch05_노드의 관리</title>
 </head>
 <body>
-    <!-- 노드의 관리 -->
-    
+    <h1>노드의 관리</h1>
+    <h2>제목2</h2>
+    <p>p태그입니다</p>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <form id="formTest">
+        <label for="">이름</label>
+        <input type="text" id="name">
+    </form>
+
     <script>
-        
+        function addElement() {
+            // 노드의 추가, 생성
+            let ulTag = document.querySelector("ul");  // ul에 li를 추가하기 위함
+
+            let liTag = document.createElement("li");    // li 노드 생성
+            let text = document.createTextNode("안녕");  // li에 들어갈 textNode 생성
+            liTag.appendChild(text);  // <li>안녕</li>
+            ulTag.appendChild(liTag); // ul에 <li>안녕</li>을 마지막 li로 추가
+
+            let liTag2 = document.createElement("li");
+            ulTag.appendChild(liTag2);
+            liTag2.textContent = "이렇게도 추가할 수 있다"
+
+            ulTag.appendChild(document.createElement("li"));
+            ulTag.lastElementChild.innerHTML = "마지막 li";
+
+            ulTag.appendChild(document.createElement("p"));
+            ulTag.lastChild.innerHTML = "ul에 추가된 p태그 입니다";
+
+            let style = document.createAttribute("style");
+            ulTag.setAttributeNode(style);
+            ulTag.style.color = "cornflowerblue";
+        }
+        addElement();
+
+        function removeElement() {
+            // 노드의 삭제
+            let ulTag = document.querySelector("ul");
+            ulTag.removeChild(ulTag.lastChild);  // <p>추가된 p태그입니다</p> 삭제
+            ulTag.removeChild(ulTag.lastElementChild);  // <li>마지막 li</li> 삭제
+        }
+        removeElement();
+
+        function cloneElement() {
+            // 노드의 복제
+            let body = document.querySelector("body");
+            body.appendChild( document.querySelector("#formTest").cloneNode(true) );
+
+            let formTag = document.querySelector("#formTest");
+            let cloneTag = body.appendChild(formTag.cloneNode(true));
+            let cloneTag2 = formTag.cloneNode(true);
+        }
+        cloneElement();
+
+        function changeNode() {
+            // 노드의 변경
+            let title = document.querySelector("h2");
+            title.textContent = "textContent로 바꾼 제목";
+            title.style.color = "orange";
+            title.setAttribute("class", "classname");  // class="classname"
+        }
+        changeNode();
+
+        function practice() {
+            // 실습
+            let body = document.querySelector("body");
+            let ulTag = document.querySelector("ul");
+            let pTag = document.createElement("p");
+            let pText = document.createTextNode("textnode를 이용한 텍스트입니다");
+            body.appendChild(pTag);
+            pTag.appendChild(pText);
+
+            let pStyle = document.createAttribute("style");
+            pStyle.value = "color: tomato";
+            pTag.setAttributeNode(pStyle);
+
+            let li = document.querySelectorAll("li");
+            li[0].style.color = "orange";  // <li>1<li>
+            li[0].removeAttribute("style");
+            ulTag.removeChild(ulTag.firstChild);  // " "
+            ulTag.removeChild(ulTag.firstElementChild);  // <li>1<li> 삭제
+            // ulTag.remove();
+        }
+        practice();
     </script>
 </body>
 </html>
