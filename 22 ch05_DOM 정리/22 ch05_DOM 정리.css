@@ -1,0 +1,17 @@
+.header h1 {
+    color: tomato;
+}
+
+.header h1.on {
+    background-color: wheat;
+}
+
+.main ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.main ul li::after {
+    content: "";
+    margin-right: 50px;
+}

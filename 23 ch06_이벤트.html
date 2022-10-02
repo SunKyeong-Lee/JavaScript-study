@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23 ch06_이벤트</title>
+    <style>
+        #text2, #text3 {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>이벤트 리스너 등록</h1>
+    <h2>객체나 요소에 프로퍼티로 등록하는 방법</h2>
+    <p>1. 자바스크립트 코드에서 프로퍼티로 등록</p>
+    <p id="text1">이 문자열은 HTML 문서가 로드되면 다른 문자열로 바뀔 것입니다</p>
+
+    <p>2. HTML 태그에 속성으로 등록</p>
+    <p id="text2" onclick="alert('문자열을 클릭했습니다!')">이 문자열을 클릭해보세요</p>
+    <p id="text3" onclick="testFunc()">사용자 함수가 실행됩니다. 클릭해주세요</p>
+    <p>
+        HTML 이벤트 속성으로 이벤트 핸들러 함수를 넣어줄 때,
+        "함수이름()" 형태로 넣어서 사용할 수 있다. <br>
+        이때, 넣어준 인수 값이 문자열일 경우
+        작은따옴표(')룰 사용하여 큰따옴표(")와 겹치지 않게 주의
+    </p>
+
+    <br>
+    <!-- 요소에 속성으로 등록하는 방법 실습-->
+    <!-- onclick(), onfocus(), onblur() -->
+    <p>값을 넣어주세요</p>
+    <input type="text" id="inputText" onfocus="changeBackground()" onblur="removeBackground()">
+    <button onclick="result()">확인</button>
+    <p id="textshow"></p>
+
+    <br>
+    <!-- onchange-->
+    <p>원하는 값을 선택하세요</p>
+    <select id="selectBox" onchange="selectTest(this)" style="width: 200px;">
+        <option value="">선택</option>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="JavaScript">JavaScript</option>
+    </select>
+
+    <!-- <inpu>태그의 checked속성은 boolean속성 -->
+    <div style="margin-top: 50px;">
+        <input type="checkbox" checked>체크박스입니다<br>
+        <input type="radio" id="radio1">라디오 버튼입니다<br>
+        <input type="radio" id="radio2" disabled>라디오 버튼입니다 <br>
+    </div>
+
+
+    <script>
+        // 이벤트 리스너 등록
+        // 자바스크립트 코드에서 프로퍼티로 등록
+        // onload 이벤트 : 이 함수는 HTML 문서가 로드될 때 실행됨
+        window.onload = function() {
+            let text = document.querySelector("#text1");
+            text.innerHTML = "HTML 문서가 로드되었습니다";
+            console.log("윈도우가 로드되었습니다");
+        }
+
+        // HTML 태그에 속성으로 등록 (사용자 함수 실행)
+        function testFunc() {
+            if (confirm("확인하시겠습니까?")) {
+                alert("확인");
+            } else {
+                console.log("취소했습니다");
+            }
+        }
+
+        // 실습 onclick(), onfocus(), onblur()
+        const inputText = document.querySelector("#inputText");
+
+        function result() {
+            // input의 입력값 들고오기
+            let textValue = inputText.value;
+            // 들고온 input의 입력값 출력
+            const pTag = document.querySelector("#textshow");
+            pTag.innerHTML = textValue;
+        }
+
+        function changeBackground() {
+            inputText.style.color = "white";
+            inputText.style.backgroundColor = "gray";
+        }
+
+        function removeBackground() {
+            inputText.style.color = "black";
+            inputText.style.backgroundColor = "white";
+        }
+
+        // onchange()
+        function selectTest(obj) {
+            const selectValue = obj.value;
+            if (selectValue == "") {
+                alert("값이 없습니다.");
+            } else if (selectValue == "HTML") {
+                alert("HTML을 선택했습니다");
+            } else if (selectValue == "CSS") {
+                alert("CSS를 선택했습니다");
+            } else if (selectValue == "JavaScript") {
+                alert("JavaScript를 선택했습니다");
+            }
+        }
+
+        // checked속성의 boolean값 확인
+        console.log(document.querySelector("input[type='checkbox']").checked);  // true
+        console.log(document.querySelector("#radio1").checked);  // false
+        console.log(document.querySelector("#radio2").checked);  // false
+
+        // 체크 되어있던 체크박스를 체크 해제
+        document.querySelector("input[type='checkbox']").checked = false;
+    </script>
+</body>
+</html>
