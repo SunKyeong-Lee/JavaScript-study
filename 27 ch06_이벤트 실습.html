@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27 ch06_이벤트 실습</title>
+    <style>
+        #box {
+            background-color: wheat;
+            display: inline-block;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>이벤트 실습</h1>
+    <!-- 실습 1 -->
+    <p id="text">이 문자열을 눌러주세요</p>
+
+    <!-- 실습 2 -->
+    <div id="box">
+            마우스 커서가 올라오면<br> 
+            배경색이 바뀝니다
+    </div>
+
+    <!-- 실습 3 -->
+    <ol>
+        <li id="first_list">
+            <input type="checkbox" id="checkbox">
+            첫번째 리스트입니다.
+        </li>
+    </ol>
+
+    <script>
+        // 실습 1 - 클릭하면 내용과 글자색이 달라지게, 한번 더 클릭하면 원래대로
+        const text = document.querySelector("#text");
+        text.addEventListener("click", changeText);
+        function changeText(e) {
+            let textDOM = e.target;
+            if (textDOM.style.color == "tomato") {
+                textDOM.style.color = "black";
+                textDOM.innerHTML = "이 문자열을 눌러주세요";
+            } else {
+                textDOM.style.color = "tomato";
+                textDOM.innerHTML = "숨겨진 단어입니다";
+            }
+        }
+
+        // 실습 2 - div에 마우스가 올라가면 배경색이 바뀌게, 영역을 벗어나면 원래 색으로
+        const box = document.querySelector("#box");
+        box.addEventListener("mouseover", changeColor);
+        box.addEventListener("mouseout", defaultColor);
+        function changeColor(e) {
+            e.target.style.backgroundColor = "yellowgreen";
+        }
+        function defaultColor(e) {
+            e.target.style.backgroundColor = "wheat";
+        }
+
+        // 실습 3
+        // 체크박스에서 체크가 된 상태라면 글자색이 회색으로 (true)
+        // 체크가 되어 있지 않은 상태라면 글자색을 검정으로 바꾸기 (false)
+        const checkbox = document.querySelector("#checkbox");
+        checkbox.addEventListener("click", change);
+        function change(e) {
+            if (e.target.checked) {
+                e.target.parentNode.style.color = "lightgray";
+            } else {
+                e.target.parentNode.style.color = "black";
+            }
+        }
+    </script>
+</body>
+</html>

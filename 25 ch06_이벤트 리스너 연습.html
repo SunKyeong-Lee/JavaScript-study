@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 ch06_이벤트 리스너 연습</title>
+</head>
+<body>
+    <h1 id="title">반갑습니다</h1>
+    <label for="">이름</label>
+    <input type="text" id="name">
+    <button id="button">확인</button>
+    <p id="count"></p>
+
+    <script>
+        // 버튼을 눌렀을 때 
+        // input값을 가져와서 h1 태그에 "ㅇㅇㅇ님 반갑습니다" 출력하기
+        // 버튼을 누를 때마다 변수값을 1식 올려서 "ㅇ회 입장했습니다"를 출력하기
+        const button = document.querySelector("#button");
+        button.addEventListener("click", printName);
+
+        // 전역변수로 두어서 접근
+        let numCount = 0;
+        
+        function printName() {
+            const name = document.querySelector("#name");
+            const title = document.querySelector("#title");
+            const count = document.querySelector("#count");
+            
+            // input값을 가져와서 title에 넣기
+            title.innerHTML = `${name.value}님 반갑습니다`;
+
+            // count값을 1식 증가시키기
+            numCount++;
+            count.innerHTML = `${numCount}회 입장했습니다`;      
+        }
+    </script>
+</body>
+</html>
