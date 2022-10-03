@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28 ch06_이벤트 버블링</title>
+    <style>
+        #divclick {
+            background-color: wheat;
+        }
+
+        #pclick {
+            background-color: thistle;
+        }
+
+        #spanclick {
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>이벤트 버블링</h1>
+
+    <div id="divclick">
+        <p id="pclick">
+            <span id="spanclick">span태그</span>
+            태그입니다
+        </p>
+        div태그입니다
+    </div>
+
+    <p>
+        div와 p와 span이 동일한 이벤트를 가지고 있을 경우, <br>
+        span태그에 이벤트(click)가 발생했을 때, p태그와 span태그에서도 이벤트가 발생하는 현상 <br>
+        가장 아래에서 올라오면서 이벤트가 실행된다고 해서 버블링이라고 한다. <br>
+        이벤트가 다르게 발생할 때는 버블링이 일어나지 않는다.
+    </p>
+    <p>
+        위에서 아래로 내려오면서 실행되는 것 : 캡쳐링
+    </p>
+
+    <script>
+        // 각 요소마다 버블링 방식으로 click 이벤트 리스너를 등록함
+        document.querySelector("#divclick")
+                .addEventListener("click", (e)=>print(e, "div"));
+        document.querySelector("#pclick")
+                .addEventListener("click", (e)=>print(e, "div"));
+        document.querySelector("#spanclick")
+                .addEventListener("click", (e)=>print(e, "div"));
+
+        function print(e, text) {
+            // 이벤트 전파(버블링/캡쳐링) 취소
+            e.stopPropagation();
+            // e.target 이벤트가 실행된 요소
+            console.log(e.target);
+            console.log(text);
+        }
+    </script>
+</body>
+</html>
